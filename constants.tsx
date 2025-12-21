@@ -1,4 +1,6 @@
 
+import { Transaction } from './types';
+
 export const COLORS = {
   gold: '#EAB308',
   darkGold: '#A16207',
@@ -7,7 +9,9 @@ export const COLORS = {
   lightGray: '#2C2C2E',
 };
 
-export const MOCK_TRANSACTIONS = [
+// Fix: Explicitly typing MOCK_TRANSACTIONS as Transaction[] to ensure the 'type' property 
+// is correctly inferred as a union of specific literals instead of a generic string.
+export const MOCK_TRANSACTIONS: Transaction[] = [
   {
     id: '1',
     type: 'deposit',

@@ -50,7 +50,7 @@ const Dashboard: React.FC = () => {
         <div className="text-gray-500 text-[13px] mb-3 font-bold tracking-[0.2em] uppercase opacity-70">TOTAL BALANCE</div>
         <div className="text-[64px] lg:text-[84px] font-bold text-white mb-10 tracking-tighter leading-none">$7,890.09</div>
         
-        {/* High-Fidelity Professional Action Buttons - Side by Side, No Icons, Increased Height */}
+        {/* High-Fidelity Professional Action Buttons - Side by Side, No Icons, 72px Height */}
         <div className="flex flex-row gap-4 justify-center max-w-lg mx-auto px-4">
           <button className="flex-1 h-[52px] bg-[#D4A017] rounded-full text-black font-bold text-[16px] active:scale-95 transition-all shadow-[0_20px_40px_-12px_rgba(212,160,23,0.4)] hover:shadow-[0_25px_50px_-12px_rgba(212,160,23,0.5)] border-t border-white/30 tracking-tight">
             Activate saving
