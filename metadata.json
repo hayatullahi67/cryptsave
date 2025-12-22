@@ -1,5 +1,7 @@
 {
   "name": "CryptSave",
   "description": "A high-fidelity cryptocurrency savings and wallet application with a sleek gold and black theme.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [
+    "camera"
+  ]
 }

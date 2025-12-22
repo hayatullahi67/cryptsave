@@ -1,10 +1,15 @@
-
 import React, { useState } from 'react';
 import { ArrowLeft, Plus, Download, Home, Car, Gift, TrendingUp, ChevronDown } from 'lucide-react';
 import TransactionItem from './TransactionItem';
 import { MOCK_TRANSACTIONS } from '../constants';
+import { AppView, Transaction } from '../types';
 
-const Wallet: React.FC = () => {
+interface WalletProps {
+  onAction: (view: AppView) => void;
+  onSelectTransaction?: (tx: Transaction) => void;
+}
+
+const Wallet: React.FC<WalletProps> = ({ onAction, onSelectTransaction }) => {
   const [activeTab, setActiveTab] = useState<'main' | 'savings'>('main');
   const allTransactions = [
     ...MOCK_TRANSACTIONS, 
@@ -31,7 +36,7 @@ const Wallet: React.FC = () => {
         </div>
       </header>
 
-      {/* Premium Tab Switcher - Centered for Mobile, Left Aligned for Desktop */}
+      {/* Premium Tab Switcher */}
       <div className="px-6 lg:px-0 mb-12">
         <div className="bg-[#0F0F10] p-1.5 rounded-[24px] flex max-w-md lg:max-w-[400px] border border-white/5 shadow-2xl">
           <button
@@ -61,7 +66,7 @@ const Wallet: React.FC = () => {
       <div className="flex-1 px-6 lg:px-0">
         {activeTab === 'main' ? (
           <div className="space-y-12">
-            {/* Balance and Actions - Premium Desktop Grid */}
+            {/* Balance and Actions */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
               {/* Primary Balance Card */}
               <div className="lg:col-span-8 bg-[#D4A017] rounded-[48px] p-10 lg:p-12 text-black relative overflow-hidden shadow-[0_25px_50px_-12px_rgba(212,160,23,0.4)] flex flex-col justify-center min-h-[260px] group">
@@ -81,13 +86,19 @@ const Wallet: React.FC = () => {
 
               {/* Quick Actions Panel */}
               <div className="lg:col-span-4 flex flex-col gap-4">
-                <button className="flex-1 bg-white hover:bg-gray-100 rounded-[32px] p-6 text-black flex flex-col items-center justify-center gap-2 active:scale-[0.97] transition-all shadow-xl border border-white group">
+                <button 
+                  onClick={() => onAction('save-funds')}
+                  className="flex-1 bg-white hover:bg-gray-100 rounded-[32px] p-6 text-black flex flex-col items-center justify-center gap-2 active:scale-[0.97] transition-all shadow-xl border border-white group"
+                >
                   <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mb-1 group-hover:scale-110 transition-transform">
                     <Plus size={24} className="text-white" strokeWidth={3} />
                   </div>
                   <span className="font-bold text-[16px]">Add Funds</span>
                 </button>
-                <button className="flex-1 bg-[#1C1C1E] hover:bg-[#252528] rounded-[32px] p-6 text-white flex flex-col items-center justify-center gap-2 active:scale-[0.97] transition-all shadow-lg border border-white/5 group">
+                <button 
+                  onClick={() => onAction('withdraw-funds')}
+                  className="flex-1 bg-[#1C1C1E] hover:bg-[#252528] rounded-[32px] p-6 text-white flex flex-col items-center justify-center gap-2 active:scale-[0.97] transition-all shadow-lg border border-white/5 group"
+                >
                   <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mb-1 group-hover:scale-110 transition-transform">
                     <Download size={22} className="text-white" />
                   </div>
@@ -96,7 +107,7 @@ const Wallet: React.FC = () => {
               </div>
             </div>
 
-            {/* Split Activity Layout - Desktop Professionalism */}
+            {/* Split Activity Layout */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start mt-8">
               {/* Left: Interactive Ring Progress */}
               <div className="lg:col-span-6">
@@ -143,21 +154,24 @@ const Wallet: React.FC = () => {
                 </div>
                 <div className="lg:h-[480px] overflow-y-auto pr-4 space-y-4 custom-scrollbar scroll-smooth">
                   {allTransactions.map((tx, idx) => (
-                    <TransactionItem key={`${tx.id}-${idx}`} transaction={tx} />
+                    <TransactionItem key={`${tx.id}-${idx}`} transaction={tx} onSelect={onSelectTransaction} />
                   ))}
                 </div>
               </div>
             </div>
           </div>
         ) : (
-          /* Savings Goals Tab - Professional Grid */
+          /* Savings Goals Tab */
           <div className="space-y-12">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-12">
               <div>
                 <h2 className="text-[24px] font-bold text-white tracking-tight mb-2">Savings Goals</h2>
                 <p className="text-gray-500 text-[15px]">You have 4 active saving goals this month.</p>
               </div>
-              <button className="bg-[#D4A017] text-black font-bold px-8 py-4 rounded-[20px] shadow-xl active:scale-95 transition-all flex items-center gap-2">
+              <button 
+                onClick={() => onAction('create-goal')}
+                className="bg-[#D4A017] text-black font-bold px-8 py-4 rounded-[20px] shadow-xl active:scale-95 transition-all flex items-center gap-2"
+              >
                 <Plus size={20} strokeWidth={3} />
                 <span>Create New Goal</span>
               </button>

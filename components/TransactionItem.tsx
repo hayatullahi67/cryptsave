@@ -1,13 +1,13 @@
-
 import React from 'react';
 import { Apple, ArrowUp, Gift } from 'lucide-react';
 import { Transaction } from '../types';
 
 interface TransactionItemProps {
   transaction: Transaction;
+  onSelect?: (tx: Transaction) => void;
 }
 
-const TransactionItem: React.FC<TransactionItemProps> = ({ transaction }) => {
+const TransactionItem: React.FC<TransactionItemProps> = ({ transaction, onSelect }) => {
   const getIcon = () => {
     switch (transaction.icon) {
       case 'apple': return <Apple size={22} className="text-white" />;
@@ -20,7 +20,10 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ transaction }) => {
   const isPositive = transaction.amount.startsWith('+');
 
   return (
-    <div className="bg-[#121214] p-5 rounded-[28px] flex items-center gap-5 border border-white/[0.03] active:bg-[#1C1C1E] transition-all cursor-pointer group hover:border-white/10 shadow-sm">
+    <div 
+      onClick={() => onSelect?.(transaction)}
+      className="bg-[#121214] p-5 rounded-[28px] flex items-center gap-5 border border-white/[0.03] active:bg-[#1C1C1E] transition-all cursor-pointer group hover:border-white/10 shadow-sm"
+    >
       <div className="w-[56px] h-[56px] bg-[#1C1C1E] rounded-[20px] flex items-center justify-center border border-white/5 transition-all group-hover:scale-105">
         {getIcon()}
       </div>
