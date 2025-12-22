@@ -1,4 +1,4 @@
-export type AppView = 'onboarding' | 'home' | 'wallet' | 'profile' | 'scan' | 'history' | 'success' | 'declined' | 'save-funds' | 'withdraw-funds' | 'create-goal' | 'view-receipt';
+export type AppView = 'onboarding' | 'home' | 'wallet' | 'profile' | 'scan' | 'history' | 'success' | 'declined' | 'save-funds' | 'withdraw-funds' | 'create-goal' | 'view-receipt' | 'buy-airtime' | 'buy-data' | 'transfer-funds';
 
 export interface Transaction {
   id: string;

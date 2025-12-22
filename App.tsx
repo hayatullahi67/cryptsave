@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { AppView, Transaction } from './types';
 import Layout from './components/Layout';
@@ -14,6 +13,8 @@ import SearchOverlay from './components/SearchOverlay';
 import NotificationDrawer from './components/NotificationDrawer';
 import ScanPayment from './components/ScanPayment';
 import ReceiptView from './components/ReceiptView';
+import AirtimeDataForm from './components/AirtimeDataForm';
+import TransferForm from './components/TransferForm';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<AppView>('onboarding');
@@ -69,6 +70,29 @@ const App: React.FC = () => {
             onComplete={(success) => setCurrentView(success ? 'success' : 'declined')} 
           />
         );
+      case 'transfer-funds':
+        return (
+          <TransferForm 
+            onCancel={() => setCurrentView('home')}
+            onComplete={() => setCurrentView('success')}
+          />
+        );
+      case 'buy-airtime':
+        return (
+          <AirtimeDataForm 
+            type="airtime" 
+            onCancel={() => setCurrentView('home')} 
+            onComplete={() => setCurrentView('success')} 
+          />
+        );
+      case 'buy-data':
+        return (
+          <AirtimeDataForm 
+            type="data" 
+            onCancel={() => setCurrentView('home')} 
+            onComplete={() => setCurrentView('success')} 
+          />
+        );
       case 'create-goal':
         return (
           <CreateGoalForm 
@@ -85,7 +109,7 @@ const App: React.FC = () => {
         ) : <Dashboard onSeeAll={() => setCurrentView('history')} onAction={(type) => setCurrentView(type)} onSelectTransaction={handleTransactionSelect} />;
       case 'success':
       case 'declined':
-        return <Modals type={currentView} onBack={() => setCurrentView('wallet')} />;
+        return <Modals type={currentView} onBack={() => setCurrentView('home')} />;
       default:
         return <Dashboard 
           onSeeAll={() => setCurrentView('history')} 
@@ -97,7 +121,7 @@ const App: React.FC = () => {
     }
   };
 
-  const immersiveViews: AppView[] = ['onboarding', 'success', 'declined', 'save-funds', 'withdraw-funds', 'create-goal', 'scan', 'view-receipt'];
+  const immersiveViews: AppView[] = ['onboarding', 'success', 'declined', 'save-funds', 'withdraw-funds', 'create-goal', 'scan', 'view-receipt', 'buy-airtime', 'buy-data', 'transfer-funds'];
   
   const content = immersiveViews.includes(currentView) ? (
     <div className="min-h-screen w-full bg-[#000000] flex justify-center items-center overflow-x-hidden p-0">
