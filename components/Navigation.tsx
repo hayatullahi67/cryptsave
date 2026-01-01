@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Wallet, Scan, Clock, User, LogOut, ChevronRight } from 'lucide-react';
+import { Home, Wallet, Scan, Clock, User, ArrowLeftRight } from 'lucide-react';
 import { AppView } from '../types';
 
 interface NavigationProps {
@@ -12,6 +12,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentView, setView, isDesktop
   const navItems = [
     { icon: Home, view: 'home' as AppView, label: 'Dashboard' },
     { icon: Wallet, view: 'wallet' as AppView, label: 'Wallet' },
+    { icon: ArrowLeftRight, view: 'exchange' as AppView, label: 'Exchange' },
     { icon: Scan, view: 'scan' as AppView, label: 'Scan Pay' },
     { icon: Clock, view: 'history' as AppView, label: 'History' },
     { icon: User, view: 'profile' as AppView, label: 'Profile' },

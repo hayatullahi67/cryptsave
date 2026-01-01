@@ -1,17 +1,17 @@
-
 import React from 'react';
-import { ArrowLeft, Settings, ChevronRight, Pencil, CheckSquare, Lock, LayoutGrid, Gift, Headphones, LogOut } from 'lucide-react';
+import { ArrowLeft, Settings as SettingsIcon, ChevronRight, Pencil, CheckSquare, Lock, LayoutGrid, Gift, Headphones, LogOut } from 'lucide-react';
 
 interface ProfileProps {
   onLogout: () => void;
+  onGoToSettings: () => void;
 }
 
-const Profile: React.FC<ProfileProps> = ({ onLogout }) => {
+const Profile: React.FC<ProfileProps> = ({ onLogout, onGoToSettings }) => {
   const menuItems = [
     { icon: Pencil, label: 'Edit Profile' },
     { icon: CheckSquare, label: 'Account Verification', badge: 'Verified' },
-    { icon: Lock, label: 'Security' },
-    { icon: LayoutGrid, label: 'App Settings' },
+    { icon: Lock, label: 'Security & Privacy', action: onGoToSettings },
+    { icon: LayoutGrid, label: 'App Settings', action: onGoToSettings },
     { icon: Gift, label: 'Referral & Rewards' },
     { icon: Headphones, label: 'Support' },
   ];
@@ -24,8 +24,11 @@ const Profile: React.FC<ProfileProps> = ({ onLogout }) => {
           <ArrowLeft size={24} />
         </button>
         <h1 className="font-bold text-[18px] tracking-tight">Profile</h1>
-        <button className="w-10 h-10 -mr-2 flex items-center justify-center text-white active:scale-90 transition-transform">
-          <Settings size={22} className="opacity-90" />
+        <button 
+          onClick={onGoToSettings}
+          className="w-10 h-10 -mr-2 flex items-center justify-center text-white active:scale-90 transition-transform"
+        >
+          <SettingsIcon size={22} className="opacity-90" />
         </button>
       </header>
 
@@ -39,7 +42,6 @@ const Profile: React.FC<ProfileProps> = ({ onLogout }) => {
                className="w-full h-full object-cover" 
              />
           </div>
-          {/* Pencil edit button overlay */}
           <button className="absolute -bottom-1 -right-1 w-9 h-9 bg-[#D4A017] rounded-full border-[3px] border-black flex items-center justify-center active:scale-90 transition-transform shadow-lg">
             <Pencil size={15} className="text-black" strokeWidth={3} />
           </button>
@@ -59,6 +61,7 @@ const Profile: React.FC<ProfileProps> = ({ onLogout }) => {
         {menuItems.map((item, idx) => (
           <button 
             key={idx} 
+            onClick={item.action}
             className="w-full flex items-center gap-4 py-[18px] group active:opacity-60 transition-all border-b border-white/[0.04]"
           >
             <div className="w-6 h-6 flex items-center justify-center text-white opacity-90 group-hover:text-[#D4A017] group-hover:opacity-100 transition-all">
@@ -76,7 +79,6 @@ const Profile: React.FC<ProfileProps> = ({ onLogout }) => {
           </button>
         ))}
         
-        {/* Logout Button (Matches screenshot gold style) */}
         <button
           onClick={onLogout}
           className="w-full flex items-center gap-4 py-6 text-[#D4A017] active:scale-95 transition-all group"
@@ -88,7 +90,6 @@ const Profile: React.FC<ProfileProps> = ({ onLogout }) => {
         </button>
       </div>
 
-      {/* Bottom Home Indicator Mock */}
       <div className="flex justify-center pb-2 fixed bottom-0 w-full bg-transparent pointer-events-none">
         <div className="w-32 h-1 bg-white/10 rounded-full" />
       </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Bell, ChevronDown, Smartphone, Globe } from 'lucide-react';
+import { Search, Bell, ChevronDown, Smartphone, Globe, Zap, Tv } from 'lucide-react';
 import StatGraph from './StatGraph';
 import TransactionItem from './TransactionItem';
 import { MOCK_TRANSACTIONS } from '../constants';
@@ -25,6 +25,8 @@ const Dashboard: React.FC<DashboardProps> = ({
   const quickActions = [
     { label: 'Airtime', icon: Smartphone, view: 'buy-airtime' },
     { label: 'Data', icon: Globe, view: 'buy-data' },
+    { label: 'Electricity', icon: Zap, view: 'buy-electricity' },
+    { label: 'TV Bills', icon: Tv, view: 'buy-tv' },
   ];
 
   return (
@@ -86,15 +88,15 @@ const Dashboard: React.FC<DashboardProps> = ({
         </div>
       </section>
 
-      {/* 3. Quick Services - 2-Column Mobile Grid (Airtime & Data Only) */}
-      <section className="grid grid-cols-2 md:flex md:justify-center gap-4 px-2 lg:px-0">
+      {/* 3. Quick Services - Updated to 4 items */}
+      <section className="grid grid-cols-2 md:grid-cols-4 gap-4 px-2 lg:px-0">
         {quickActions.map((item, idx) => {
           const Icon = item.icon;
           return (
             <button 
               key={idx}
               onClick={() => onAction(item.view as AppView)}
-              className="flex flex-col items-center justify-center gap-4 bg-[#0A0A0B] border border-white/[0.04] p-6 lg:p-8 rounded-[36px] hover:border-[#D4A017]/30 transition-all active:scale-95 group min-w-0 md:min-w-[160px] col-span-1"
+              className="flex flex-col items-center justify-center gap-4 bg-[#0A0A0B] border border-white/[0.04] p-6 lg:p-8 rounded-[36px] hover:border-[#D4A017]/30 transition-all active:scale-95 group min-w-0 shadow-sm"
             >
               <div className="w-12 h-12 lg:w-14 lg:h-14 rounded-[20px] bg-[#121214] flex items-center justify-center text-[#D4A017] group-hover:bg-[#D4A017] group-hover:text-black transition-all border border-white/5 shadow-inner">
                 <Icon size={24} />
