@@ -22,6 +22,7 @@ import TransferForm from './components/TransferForm';
 import Exchange from './components/Exchange';
 import P2PChat from './components/P2PChat';
 import SecurityModal from './components/SecurityModal';
+import CardApplication from './components/CardApplication';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<AppView>('onboarding');
@@ -136,6 +137,8 @@ const App: React.FC = () => {
       case 'buy-electricity':
       case 'buy-tv':
         return <UtilityBillForm type={currentView === 'buy-electricity' ? 'electricity' : 'tv'} onCancel={() => setCurrentView('home')} onComplete={() => triggerSecurityCheck(() => setCurrentView('success'))} />;
+      case 'apply-card':
+        return <CardApplication onCancel={() => setCurrentView('home')} onComplete={() => triggerSecurityCheck(() => setCurrentView('success'))} />;
       case 'create-goal':
         return <CreateGoalForm onCancel={() => setCurrentView('wallet')} onComplete={() => setCurrentView('success')} />;
       case 'view-receipt':
@@ -148,7 +151,7 @@ const App: React.FC = () => {
     }
   };
 
-  const immersiveViews: AppView[] = ['onboarding', 'login', 'signup', 'success', 'declined', 'save-funds', 'withdraw-funds', 'create-goal', 'scan', 'view-receipt', 'buy-airtime', 'buy-data', 'buy-electricity', 'buy-tv', 'transfer-funds', 'p2p-chat'];
+  const immersiveViews: AppView[] = ['onboarding', 'login', 'signup', 'success', 'declined', 'save-funds', 'withdraw-funds', 'create-goal', 'scan', 'view-receipt', 'buy-airtime', 'buy-data', 'buy-electricity', 'buy-tv', 'transfer-funds', 'p2p-chat', 'apply-card'];
   
   return (
     <>
