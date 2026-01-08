@@ -12,7 +12,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentView, setView, isDesktop
   const navItems = [
     { icon: Home, view: 'home' as AppView, label: 'Dashboard' },
     { icon: Wallet, view: 'wallet' as AppView, label: 'Wallet' },
-    { icon: ArrowLeftRight, view: 'exchange' as AppView, label: 'Exchange' },
+    { icon: ArrowLeftRight, view: 'conversion' as AppView, label: 'Conversion' },
     { icon: Scan, view: 'scan' as AppView, label: 'Scan Pay' },
     { icon: Clock, view: 'history' as AppView, label: 'History' },
     { icon: User, view: 'profile' as AppView, label: 'Profile' },

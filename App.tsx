@@ -24,6 +24,7 @@ import P2PChat from './components/P2PChat';
 import SecurityModal from './components/SecurityModal';
 import CardApplication from './components/CardApplication';
 import GiftCardForm from './components/GiftCardForm';
+import Conversion from './components/Conversion';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<AppView>('onboarding');
@@ -94,6 +95,8 @@ const App: React.FC = () => {
         );
       case 'wallet':
         return <Wallet onAction={(type) => setCurrentView(type)} onSelectTransaction={handleTransactionSelect} />;
+      case 'conversion':
+        return <Conversion onComplete={() => triggerSecurityCheck(() => setCurrentView('success'))} />;
       case 'exchange':
         return <Exchange onStartTrade={(merchant, mode, asset) => {
           setCurrentView('p2p-chat');

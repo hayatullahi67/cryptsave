@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Bell, ChevronDown, Smartphone, Globe, Zap, CreditCard, Tv, Gift } from 'lucide-react';
+import { Search, Bell, ChevronDown, Smartphone, Globe, Zap, CreditCard, Tv, Gift, ArrowLeftRight } from 'lucide-react';
 import StatGraph from './StatGraph';
 import TransactionItem from './TransactionItem';
 import { MOCK_TRANSACTIONS } from '../constants';
@@ -29,10 +29,11 @@ const Dashboard: React.FC<DashboardProps> = ({
     { label: 'TV Bills', icon: Tv, view: 'buy-tv' },
     { label: 'Crypto Card', icon: CreditCard, view: 'apply-card' },
     { label: 'Gift Card', icon: Gift, view: 'buy-giftcard' },
+    { label: 'P2P Market', icon: ArrowLeftRight, view: 'exchange' },
   ];
 
   return (
-    <div className="flex flex-col pb-28 lg:pb-0 gap-10 lg:gap-16">
+    <div className="flex flex-col pb-28 lg:pb-0 gap-8 lg:gap-12">
       {/* 1. Header Section */}
       <header className="flex justify-between items-center px-2 lg:px-0">
         <div className="flex items-center gap-3">
@@ -65,12 +66,12 @@ const Dashboard: React.FC<DashboardProps> = ({
         </div>
       </header>
 
-      {/* 2. Main Balance Section (Centered UI) */}
-      <section className="flex flex-col items-center justify-center text-center py-4 lg:py-8 px-2">
+      {/* 2. Main Balance Section */}
+      <section className="flex flex-col items-center justify-center text-center py-2 lg:py-6 px-2">
         <span className="text-gray-500 text-[11px] lg:text-[12px] font-black tracking-[0.4em] uppercase mb-4 opacity-60">
           TOTAL BALANCE
         </span>
-        <div className="text-[60px] lg:text-[100px] font-black text-white tracking-tighter leading-none mb-10 flex items-start justify-center">
+        <div className="text-[60px] lg:text-[100px] font-black text-white tracking-tighter leading-none mb-8 flex items-start justify-center">
           $7,890.09
         </div>
         
@@ -90,20 +91,20 @@ const Dashboard: React.FC<DashboardProps> = ({
         </div>
       </section>
 
-      {/* 3. Quick Services - Updated to strictly 3 columns for portable professional feel */}
-      <section className="grid grid-cols-3 gap-3 lg:gap-6 px-2 lg:px-0">
+      {/* 3. Quick Services - COMPACT 3x3 Grid */}
+      <section className="grid grid-cols-3 gap-3 lg:gap-4 px-2 lg:px-0">
         {quickActions.map((item, idx) => {
           const Icon = item.icon;
           return (
             <button 
               key={idx}
               onClick={() => onAction(item.view as AppView)}
-              className="flex flex-col items-center justify-center gap-3 lg:gap-4 bg-[#0A0A0B] border border-white/[0.04] p-4 lg:p-10 rounded-[28px] lg:rounded-[40px] hover:border-[#D4A017]/30 transition-all active:scale-95 group min-w-0 shadow-sm"
+              className="flex flex-col items-center justify-center gap-3 lg:gap-4 bg-[#0A0A0B] border border-white/[0.04] p-4 lg:p-7 rounded-[28px] lg:rounded-[32px] hover:border-[#D4A017]/30 transition-all active:scale-95 group min-w-0 shadow-sm"
             >
-              <div className="w-10 h-10 lg:w-16 lg:h-16 rounded-[16px] lg:rounded-[24px] bg-[#121214] flex items-center justify-center text-[#D4A017] group-hover:bg-[#D4A017] group-hover:text-black transition-all border border-white/5 shadow-inner">
-                <Icon size={20} className="lg:w-7 lg:h-7" />
+              <div className="w-10 h-10 lg:w-13 lg:h-13 rounded-[16px] lg:rounded-[20px] bg-[#121214] flex items-center justify-center text-[#D4A017] group-hover:bg-[#D4A017] group-hover:text-black transition-all border border-white/5 shadow-inner">
+                <Icon size={20} className="lg:w-6 lg:h-6" />
               </div>
-              <span className="text-white font-bold text-[11px] lg:text-[16px] tracking-tight truncate w-full text-center">
+              <span className="text-white font-bold text-[11px] lg:text-[14px] tracking-tight truncate w-full text-center">
                 {item.label}
               </span>
             </button>
@@ -113,31 +114,29 @@ const Dashboard: React.FC<DashboardProps> = ({
 
       {/* 4. Statistics and Recent Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 px-2 lg:px-0">
-        {/* Left: Statistics */}
         <div className="lg:col-span-7 space-y-6">
           <div className="flex justify-between items-center">
-            <h2 className="text-[20px] font-bold text-white tracking-tight">Spending Stats</h2>
-            <button className="flex items-center gap-2 bg-[#121214] px-4 py-2 rounded-xl border border-white/5 text-[11px] text-gray-500 font-bold uppercase tracking-widest hover:text-white transition-all">
+            <h2 className="text-[18px] font-bold text-white tracking-tight">Spending Stats</h2>
+            <button className="flex items-center gap-2 bg-[#121214] px-4 py-2 rounded-xl border border-white/5 text-[10px] text-gray-500 font-bold uppercase tracking-widest hover:text-white transition-all">
               Week <ChevronDown size={14} className="opacity-60" />
             </button>
           </div>
-          <div className="bg-[#0A0A0B] rounded-[48px] border border-white/[0.04] p-8 shadow-2xl relative overflow-hidden flex items-center justify-center min-h-[360px]">
+          <div className="bg-[#0A0A0B] rounded-[40px] border border-white/[0.04] p-8 shadow-2xl relative overflow-hidden flex items-center justify-center min-h-[300px]">
             <StatGraph />
           </div>
         </div>
 
-        {/* Right: Activity */}
         <div className="lg:col-span-5 space-y-6">
           <div className="flex justify-between items-center">
-            <h2 className="text-[20px] font-bold text-white tracking-tight">Recent Activity</h2>
+            <h2 className="text-[18px] font-bold text-white tracking-tight">Recent Activity</h2>
             <button 
               onClick={onSeeAll}
-              className="text-[13px] font-bold text-gray-500 hover:text-[#D4A017] transition-all"
+              className="text-[12px] font-bold text-gray-500 hover:text-[#D4A017] transition-all"
             >
               See all
             </button>
           </div>
-          <div className="space-y-3 lg:max-h-[360px] lg:overflow-y-auto no-scrollbar">
+          <div className="space-y-3 lg:max-h-[300px] lg:overflow-y-auto no-scrollbar">
             {recentTransactions.map((tx) => (
               <TransactionItem key={tx.id} transaction={tx} onSelect={onSelectTransaction} />
             ))}
