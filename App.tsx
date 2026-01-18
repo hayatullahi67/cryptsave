@@ -25,6 +25,7 @@ import SecurityModal from './components/SecurityModal';
 import CardApplication from './components/CardApplication';
 import GiftCardForm from './components/GiftCardForm';
 import Conversion from './components/Conversion';
+import AboutUs from './components/AboutUs';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<AppView>('onboarding');
@@ -97,6 +98,8 @@ const App: React.FC = () => {
         return <Wallet onAction={(type) => setCurrentView(type)} onSelectTransaction={handleTransactionSelect} />;
       case 'conversion':
         return <Conversion onComplete={() => triggerSecurityCheck(() => setCurrentView('success'))} />;
+      case 'about-us':
+        return <AboutUs onBack={() => setCurrentView('profile')} />;
       case 'exchange':
         return <Exchange onStartTrade={(merchant, mode, asset) => {
           setCurrentView('p2p-chat');
@@ -114,7 +117,7 @@ const App: React.FC = () => {
       case 'scan':
         return <ScanPayment onBack={() => setCurrentView('home')} onComplete={() => triggerSecurityCheck(() => setCurrentView('success'))} />;
       case 'profile':
-        return <Profile onLogout={() => setCurrentView('onboarding')} onGoToSettings={() => setCurrentView('settings')} />;
+        return <Profile onLogout={() => setCurrentView('onboarding')} onGoToSettings={() => setCurrentView('settings')} onNavigate={setCurrentView} />;
       case 'settings':
         return (
           <Settings 
@@ -157,7 +160,7 @@ const App: React.FC = () => {
     }
   };
 
-  const immersiveViews: AppView[] = ['onboarding', 'login', 'signup', 'success', 'declined', 'save-funds', 'withdraw-funds', 'create-goal', 'scan', 'view-receipt', 'buy-airtime', 'buy-data', 'buy-electricity', 'buy-tv', 'transfer-funds', 'p2p-chat', 'apply-card', 'buy-giftcard'];
+  const immersiveViews: AppView[] = ['onboarding', 'login', 'signup', 'success', 'declined', 'save-funds', 'withdraw-funds', 'create-goal', 'scan', 'view-receipt', 'buy-airtime', 'buy-data', 'buy-electricity', 'buy-tv', 'transfer-funds', 'p2p-chat', 'apply-card', 'buy-giftcard', 'about-us'];
   
   return (
     <>

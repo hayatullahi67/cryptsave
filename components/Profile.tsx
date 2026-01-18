@@ -1,16 +1,19 @@
 import React from 'react';
-import { ArrowLeft, Settings as SettingsIcon, ChevronRight, Pencil, CheckSquare, Lock, LayoutGrid, Gift, Headphones, LogOut } from 'lucide-react';
+import { ArrowLeft, Settings as SettingsIcon, ChevronRight, Pencil, CheckSquare, Lock, LayoutGrid, Gift, Headphones, LogOut, Info } from 'lucide-react';
+import { AppView } from '../types';
 
 interface ProfileProps {
   onLogout: () => void;
   onGoToSettings: () => void;
+  onNavigate: (view: AppView) => void;
 }
 
-const Profile: React.FC<ProfileProps> = ({ onLogout, onGoToSettings }) => {
+const Profile: React.FC<ProfileProps> = ({ onLogout, onGoToSettings, onNavigate }) => {
   const menuItems = [
     { icon: Pencil, label: 'Edit Profile' },
     { icon: CheckSquare, label: 'Account Verification', badge: 'Verified' },
     { icon: Lock, label: 'Security & Privacy', action: onGoToSettings },
+    { icon: Info, label: 'About CryptSave', action: () => onNavigate('about-us') },
     { icon: LayoutGrid, label: 'App Settings', action: onGoToSettings },
     { icon: Gift, label: 'Referral & Rewards' },
     { icon: Headphones, label: 'Support' },
